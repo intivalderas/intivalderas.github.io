@@ -13,9 +13,7 @@
   <nav class="nav" id="nav">
     <a href="index.html" class="nav__logo">Inti Valderas Caro</a>
     <div class="nav__links">
-      <a href="#work" class="nav__link" data-label="Selected work">Portfolio</a>
       <a href="#about" class="nav__link" data-label="Get to know me">About</a>
-      <a href="#blog" class="nav__link" data-label="Thoughts & writing">Blog</a>
       <a href="#contact" class="nav__link" data-label="Let's talk">Contact</a>
     </div>
     <button class="nav__menu" id="navMenu" aria-label="Toggle menu">
@@ -25,9 +23,7 @@
 
   <!-- Mobile menu -->
   <div class="mobile-nav" id="mobileNav">
-    <a href="#work" class="mobile-nav__link">Portfolio</a>
     <a href="#about" class="mobile-nav__link">About</a>
-    <a href="#blog" class="mobile-nav__link">Blog</a>
     <a href="#contact" class="mobile-nav__link">Contact</a>
   </div>
 
@@ -49,8 +45,8 @@
         <span class="tag">Conversational AI</span>
         <span class="tag">Data-Driven Design</span>
       </div>
-      <a href="#work" class="hero__cta magnetic-btn">
-        <span>View work</span>
+      <a href="#about" class="hero__cta magnetic-btn">
+        <span>About me</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M7 17L17 7M17 7H7M17 7V17"/>
         </svg>
@@ -62,91 +58,7 @@
     </div>
   </header>
 
-  <!-- Portfolio -->
-  <section class="section" id="work">
-    <div class="section__header">
-      <div class="label">Portfolio</div>
-      <h2 class="section__title reveal">Selected work</h2>
-    </div>
-
-    <div class="portfolio-grid">
-      <a href="portfolio/vrt-redesign.html" class="project-card reveal">
-        <div class="project-card__image">
-          <div class="project-card__placeholder">
-            <span>VRT</span>
-          </div>
-          <div class="project-card__overlay">
-            <span class="project-card__view">View project →</span>
-          </div>
-        </div>
-        <div class="project-card__info">
-          <div class="project-card__tags">
-            <span class="tag tag--sm">UX Design</span>
-            <span class="tag tag--sm">Public Media</span>
-          </div>
-          <h3 class="project-card__title">VRT Digital Experience</h3>
-          <p class="project-card__desc">Designing user-centered experiences for Flanders' public broadcaster.</p>
-        </div>
-      </a>
-
-      <a href="portfolio/osoc.html" class="project-card reveal">
-        <div class="project-card__image">
-          <div class="project-card__placeholder">
-            <span>oSoc</span>
-          </div>
-          <div class="project-card__overlay">
-            <span class="project-card__view">View project →</span>
-          </div>
-        </div>
-        <div class="project-card__info">
-          <div class="project-card__tags">
-            <span class="tag tag--sm">Open Source</span>
-            <span class="tag tag--sm">Civic Tech</span>
-          </div>
-          <h3 class="project-card__title">Open Summer of Code</h3>
-          <p class="project-card__desc">Coordinating student teams building open-source solutions for real organizations.</p>
-        </div>
-      </a>
-
-      <a href="portfolio/interactive-strategy.html" class="project-card reveal">
-        <div class="project-card__image">
-          <div class="project-card__placeholder">
-            <span>Strategy</span>
-          </div>
-          <div class="project-card__overlay">
-            <span class="project-card__view">View project →</span>
-          </div>
-        </div>
-        <div class="project-card__info">
-          <div class="project-card__tags">
-            <span class="tag tag--sm">Interactive Strategy</span>
-            <span class="tag tag--sm">Consulting</span>
-          </div>
-          <h3 class="project-card__title">Valderas — Interactive Strategy</h3>
-          <p class="project-card__desc">Strategic design consulting for KBC, Engie, and LUCA School of Arts.</p>
-        </div>
-      </a>
-
-      <a href="portfolio/conversational-ai.html" class="project-card reveal">
-        <div class="project-card__image">
-          <div class="project-card__placeholder">
-            <span>AI</span>
-          </div>
-          <div class="project-card__overlay">
-            <span class="project-card__view">View project →</span>
-          </div>
-        </div>
-        <div class="project-card__info">
-          <div class="project-card__tags">
-            <span class="tag tag--sm">Conversational AI</span>
-            <span class="tag tag--sm">ML</span>
-          </div>
-          <h3 class="project-card__title">Conversational AI Explorations</h3>
-          <p class="project-card__desc">Exploring the design of AI-powered conversational interfaces.</p>
-        </div>
-      </a>
-    </div>
-  </section>
+  <!-- Portfolio (hidden until content is ready — see dev branch) -->
 
   <!-- Marquee Ticker -->
   <div class="marquee">
@@ -241,45 +153,7 @@
     </div>
   </section>
 
-  <!-- Blog -->
-  <section class="section" id="blog">
-    <div class="section__header">
-      <div class="label">Blog</div>
-      <h2 class="section__title reveal">Thoughts & writing</h2>
-    </div>
-
-    <div class="blog-grid">
-      <a href="blog/designing-with-ai.html" class="blog-card reveal">
-        <div class="blog-card__meta">
-          <time>March 2026</time>
-          <span class="tag tag--sm">AI & Design</span>
-        </div>
-        <h3 class="blog-card__title">Designing with AI: Where UX Meets Machine Learning</h3>
-        <p class="blog-card__excerpt">How interaction designers can shape the next generation of AI-powered experiences.</p>
-        <span class="blog-card__read">Read article →</span>
-      </a>
-
-      <a href="blog/open-source-design.html" class="blog-card reveal">
-        <div class="blog-card__meta">
-          <time>February 2026</time>
-          <span class="tag tag--sm">Open Source</span>
-        </div>
-        <h3 class="blog-card__title">Why Designers Should Care About Open Source</h3>
-        <p class="blog-card__excerpt">Lessons from coordinating design within Open Summer of Code.</p>
-        <span class="blog-card__read">Read article →</span>
-      </a>
-
-      <a href="blog/micro-interactions.html" class="blog-card reveal">
-        <div class="blog-card__meta">
-          <time>January 2026</time>
-          <span class="tag tag--sm">Interaction Design</span>
-        </div>
-        <h3 class="blog-card__title">The Details That Matter: Micro-interactions in Practice</h3>
-        <p class="blog-card__excerpt">Small moments of delight that make interfaces feel alive.</p>
-        <span class="blog-card__read">Read article →</span>
-      </a>
-    </div>
-  </section>
+  <!-- Blog (hidden until content is ready — see dev branch) -->
 
   <!-- Contact -->
   <section class="section section--contact" id="contact">
