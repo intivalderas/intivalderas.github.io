@@ -37,7 +37,7 @@
 
   <!-- Sidebar Navigation -->
   <aside class="sidebar" id="sidebar" aria-label="Main navigation">
-    <button class="sidebar__toggle" id="sidebarToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+    <button class="sidebar__toggle" id="sidebarToggle" type="button" aria-label="Toggle navigation" aria-expanded="true">
       <span></span><span></span>
     </button>
     <div class="sidebar__content">
@@ -110,22 +110,48 @@
             </div>
           </div>
         </div>
-        <!-- Stickers -->
+        <!-- Make a mess: stickers + drawing tools -->
         <div class="sticker-tray" id="stickerTray">
-          <div class="sticker-tray__toggle" id="stickerToggle" role="button" tabindex="0" aria-expanded="false" aria-controls="stickerItems">✦ Stickers</div>
+          <div class="sticker-tray__toggle" id="stickerToggle" role="button" tabindex="0" aria-expanded="false" aria-controls="stickerItems">✦ Make a mess</div>
           <div class="sticker-tray__items" id="stickerItems">
-            <div class="sticker-tray__item" data-sticker="🎨" data-color="#fef3c7" role="button" tabindex="0" aria-label="Place paint palette sticker">🎨</div>
-            <div class="sticker-tray__item" data-sticker="✦" data-color="#e0e7ff" role="button" tabindex="0" aria-label="Place star sticker">✦</div>
-            <div class="sticker-tray__item" data-sticker="💡" data-color="#d1fae5" role="button" tabindex="0" aria-label="Place lightbulb sticker">💡</div>
-            <div class="sticker-tray__item" data-sticker="🚀" data-color="#fce7f3" role="button" tabindex="0" aria-label="Place rocket sticker">🚀</div>
-            <div class="sticker-tray__item" data-sticker="📝" data-color="#fef9c3" data-type="postit" role="button" tabindex="0" aria-label="Place post-it note">📝</div>
+            <!-- Stickers group -->
+            <div class="sticker-tray__group">
+              <div class="sticker-tray__group-row">
+                <div class="sticker-tray__item" data-sticker="🎨" data-color="#fef3c7" role="button" tabindex="0" aria-label="Place paint palette sticker">🎨</div>
+                <div class="sticker-tray__item" data-sticker="✦" data-color="#e0e7ff" role="button" tabindex="0" aria-label="Place star sticker">✦</div>
+                <div class="sticker-tray__item" data-sticker="💡" data-color="#d1fae5" role="button" tabindex="0" aria-label="Place lightbulb sticker">💡</div>
+                <div class="sticker-tray__item" data-sticker="🚀" data-color="#fce7f3" role="button" tabindex="0" aria-label="Place rocket sticker">🚀</div>
+                <div class="sticker-tray__item" data-sticker="📝" data-color="#fef9c3" data-type="postit" role="button" tabindex="0" aria-label="Place post-it note">📝</div>
+              </div>
+              <div class="sticker-tray__clear" id="stickerClear" title="Clear all stickers" role="button" tabindex="0">Clear stickers</div>
+            </div>
             <div class="sticker-tray__divider" role="separator"></div>
-            <div class="sticker-tray__clear" id="stickerClear" title="Clear all stickers" role="button" tabindex="0">Clear all</div>
+            <!-- Drawing group -->
+            <div class="sticker-tray__group">
+              <div class="sticker-tray__group-row">
+                <button class="sticker-tray__item sticker-tray__item--draw" id="drawPencil" data-tool="pencil" title="Pencil" aria-label="Draw with pencil">&#9998;</button>
+                <button class="sticker-tray__item sticker-tray__item--draw" id="drawMarker" data-tool="marker" title="Marker" aria-label="Highlight with marker">&#9644;</button>
+              </div>
+              <div class="draw-tool__colors" id="drawColors">
+                <button class="draw-tool__color draw-tool__color--active" data-color="#0a0a0a" style="background:#0a0a0a" title="Black"></button>
+                <button class="draw-tool__color" data-color="#dc2626" style="background:#dc2626" title="Red"></button>
+                <button class="draw-tool__color" data-color="#2563eb" style="background:#2563eb" title="Blue"></button>
+                <button class="draw-tool__color" data-color="#16a34a" style="background:#16a34a" title="Green"></button>
+                <button class="draw-tool__color" data-color="#f59e0b" style="background:#f59e0b" title="Yellow"></button>
+              </div>
+              <div class="draw-tool__thickness" id="drawThicknessWrap">
+                <input type="range" id="drawThickness" min="1" max="20" value="3" class="draw-tool__slider">
+              </div>
+              <div class="sticker-tray__clear" id="drawClear" title="Clear drawing" role="button" tabindex="0">Clear drawing</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </aside>
+
+  <!-- Main Content -->
+  <div class="main-content" id="mainContent">
 
   <!-- Hero -->
   <header class="hero">
@@ -498,6 +524,7 @@
     <p>© 2026 Inti Valderas Caro</p>
   </footer>
 
+  <canvas class="draw-canvas" id="drawCanvas" aria-hidden="true"></canvas>
   <div class="sticker-canvas" id="stickerCanvas"></div>
 
   <!-- Noise grain overlay -->
@@ -505,6 +532,8 @@
 
   <!-- Particle canvas -->
   <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+  </div><!-- /.main-content -->
 
   <!-- Custom cursor -->
   <div class="cursor" id="cursor" aria-hidden="true"></div>
@@ -517,6 +546,7 @@
   <script src="assets/js/stickers.js"></script>
   <script src="assets/js/ui.js"></script>
   <script src="assets/js/easter-eggs.js"></script>
+  <script src="assets/js/draw.js"></script>
   <script src="assets/js/settings.js"></script>
   <script src="assets/js/main.js"></script>
 </body>

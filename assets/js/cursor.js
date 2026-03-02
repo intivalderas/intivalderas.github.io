@@ -87,13 +87,38 @@ window.initParticles = function () {
     }
   }
 
-  document.addEventListener('mousemove', (e) => {
-    const now = Date.now();
-    if (now - lastParticleTime > 30) {
-      particles.push(new Particle(e.clientX, e.clientY));
-      lastParticleTime = now;
+  var isDesktop = window.innerWidth > 768;
+
+  if (isDesktop) {
+    // Desktop: mouse-driven particles
+    document.addEventListener('mousemove', (e) => {
+      const now = Date.now();
+      if (now - lastParticleTime > 30) {
+        particles.push(new Particle(e.clientX, e.clientY));
+        lastParticleTime = now;
+      }
+    });
+  } else {
+    // Mobile: ambient particles at random positions, biased by gyroscope tilt
+    var gyroVx = 0, gyroVy = 0;
+    if (window.Gyroscope) {
+      Gyroscope.on(function (gx, gy) {
+        gyroVx = (gx - 0.5) * 1.5;
+        gyroVy = (gy - 0.5) * 1.0;
+      });
     }
-  });
+
+    setInterval(function () {
+      if (canvas.style.display === 'none') return;
+      var x = Math.random() * canvas.width;
+      var y = Math.random() * canvas.height;
+      var p = new Particle(x, y);
+      p.vx += gyroVx;
+      p.vy += gyroVy;
+      p.decay = Math.random() * 0.008 + 0.005;
+      particles.push(p);
+    }, 200);
+  }
 
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);

@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Interactive features
   initStickers();
+  initDraw();
   initDarkMode();
   initResume();
 });

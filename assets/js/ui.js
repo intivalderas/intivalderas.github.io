@@ -1,53 +1,58 @@
 /* =========================================
-   UI: Nav, Scroll, Mobile Menu,
+   UI: Sidebar, Scroll,
    Magnetic Buttons, Tags, Parallax
    ========================================= */
 
 window.initNav = function () {
-  const nav = document.getElementById('nav');
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('sidebarToggle');
   const scrollIndicator = document.getElementById('scrollIndicator');
 
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
+  if (!sidebar || !toggle) return;
 
-    if (currentScroll > 50) {
-      nav.classList.add('nav--scrolled');
-    } else {
-      nav.classList.remove('nav--scrolled');
+  function collapseSidebar() {
+    sidebar.classList.add('sidebar--collapsed');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  function expandSidebar() {
+    sidebar.classList.remove('sidebar--collapsed');
+    toggle.setAttribute('aria-expanded', 'true');
+  }
+
+  toggle.addEventListener('click', () => {
+    sidebar.classList.contains('sidebar--collapsed') ? expandSidebar() : collapseSidebar();
+  });
+
+  // Mobile: close on click outside
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768 && !sidebar.classList.contains('sidebar--collapsed') && !sidebar.contains(e.target) && e.target !== toggle) {
+      collapseSidebar();
     }
+  });
 
-    if (scrollIndicator && currentScroll > 200) {
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !sidebar.classList.contains('sidebar--collapsed')) {
+      collapseSidebar();
+    }
+  });
+
+  // Scroll indicator fade
+  window.addEventListener('scroll', () => {
+    if (scrollIndicator && window.scrollY > 200) {
       scrollIndicator.style.opacity = '0';
       scrollIndicator.style.transition = 'opacity 0.5s ease';
     }
   });
-};
 
+  // Mobile: start collapsed
+  if (window.innerWidth <= 768) {
+    collapseSidebar();
+  }
 
-window.initMobileMenu = function () {
-  const navMenu = document.getElementById('navMenu');
-  const mobileNav = document.getElementById('mobileNav');
-
-  if (!navMenu || !mobileNav) return;
-
-  navMenu.addEventListener('click', () => {
-    navMenu.classList.toggle('nav__menu--active');
-    mobileNav.classList.toggle('mobile-nav--active');
-    const isOpen = mobileNav.classList.contains('mobile-nav--active');
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    navMenu.setAttribute('aria-expanded', String(isOpen));
-    mobileNav.setAttribute('aria-hidden', String(!isOpen));
-  });
-
-  mobileNav.querySelectorAll('.mobile-nav__link').forEach(link => {
-    link.addEventListener('click', () => {
-      navMenu.classList.remove('nav__menu--active');
-      mobileNav.classList.remove('mobile-nav--active');
-      document.body.style.overflow = '';
-      navMenu.setAttribute('aria-expanded', 'false');
-      mobileNav.setAttribute('aria-hidden', 'true');
-    });
-  });
+  // Expose for other modules
+  window.closeSidebar = collapseSidebar;
 };
 
 
@@ -60,6 +65,7 @@ window.initSmoothScroll = function () {
         const offset = 80;
         const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        if (window.closeSidebar) window.closeSidebar();
       }
     });
   });
@@ -107,6 +113,10 @@ window.initParallax = function () {
   const heroTitle = document.querySelector('.hero__title');
   if (!heroTitle) return;
 
+  const heroSubtitle = document.querySelector('.hero__subtitle');
+  const heroTags = document.querySelector('.hero__tags');
+
+  // Scroll-based parallax (desktop + mobile)
   window.addEventListener('scroll', () => {
     const scroll = window.scrollY;
     if (scroll < window.innerHeight) {
@@ -114,6 +124,22 @@ window.initParallax = function () {
       heroTitle.style.opacity = 1 - (scroll / (window.innerHeight * 0.8));
     }
   });
+
+  // Gyroscope-based tilt shift (mobile)
+  if (window.Gyroscope) {
+    Gyroscope.on(function (gx, gy) {
+      if (window.scrollY > window.innerHeight * 0.5) return;
+      var offsetX = (gx - 0.5) * 20; // max ~10px each direction
+      var offsetY = (gy - 0.5) * 10;
+      heroTitle.style.transform = 'translateY(' + (window.scrollY * 0.08 + offsetY) + 'px) translateX(' + offsetX + 'px)';
+      if (heroSubtitle) {
+        heroSubtitle.style.transform = 'translateX(' + (offsetX * 0.6) + 'px) translateY(' + (offsetY * 0.6) + 'px)';
+      }
+      if (heroTags) {
+        heroTags.style.transform = 'translateX(' + (offsetX * 0.4) + 'px) translateY(' + (offsetY * 0.4) + 'px)';
+      }
+    });
+  }
 };
 
 
@@ -131,26 +157,14 @@ window.initTagHover = function () {
 
 window.initResume = function () {
   const toggleBtn = document.getElementById('resumeToggle');
-  const toggleMobile = document.getElementById('resumeToggleMobile');
   const backBtn = document.getElementById('resumeBack');
   const printBtn = document.getElementById('resumePrint');
-  const navMenu = document.getElementById('navMenu');
-  const mobileNav = document.getElementById('mobileNav');
 
   function enterResume(e) {
     e.preventDefault();
     document.body.classList.add('resume-mode');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    // Close mobile menu if open
-    if (navMenu) {
-      navMenu.classList.remove('nav__menu--active');
-      navMenu.setAttribute('aria-expanded', 'false');
-    }
-    if (mobileNav) {
-      mobileNav.classList.remove('mobile-nav--active');
-      mobileNav.setAttribute('aria-hidden', 'true');
-    }
-    document.body.style.overflow = '';
+    if (window.closeSidebar) window.closeSidebar();
   }
 
   function exitResume(e) {
@@ -159,7 +173,6 @@ window.initResume = function () {
   }
 
   if (toggleBtn) toggleBtn.addEventListener('click', enterResume);
-  if (toggleMobile) toggleMobile.addEventListener('click', enterResume);
   if (backBtn) backBtn.addEventListener('click', exitResume);
   if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
 };

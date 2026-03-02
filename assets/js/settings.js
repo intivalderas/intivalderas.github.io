@@ -24,6 +24,15 @@ window.initSettings = function () {
 
   // --- Toggle panel open/close ---
   toggle.addEventListener('click', function () {
+    // Close sticker tray if open
+    var stickerTray = document.getElementById('stickerTray');
+    if (stickerTray) {
+      stickerTray.classList.remove('sticker-tray--open');
+      var st = document.getElementById('stickerToggle');
+      if (st) st.setAttribute('aria-expanded', 'false');
+    }
+    // Close draw tool if open
+    if (window.closeDrawMenu) window.closeDrawMenu();
     var isOpen = panel.classList.toggle('settings__panel--open');
     toggle.setAttribute('aria-expanded', String(isOpen));
   });
