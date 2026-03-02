@@ -19,42 +19,43 @@ console.log(
 
 document.addEventListener('DOMContentLoaded', () => {
   const isDesktop = window.innerWidth > 768;
+  const run = (fn) => { if (typeof fn === 'function') fn(); };
 
   // Consent (first — before analytics would fire)
-  initConsent();
+  run(window.initConsent);
 
   // Settings (early, so saved prefs apply before other modules)
-  initSettings();
+  run(window.initSettings);
 
   // Text effects (always)
-  initLetterAnimation();
-  initTextScramble();
+  run(window.initLetterAnimation);
+  run(window.initTextScramble);
 
   // UI (always)
-  initNav();
-  initSmoothScroll();
-  initScrollReveal();
-  initTagHover();
+  run(window.initNav);
+  run(window.initSmoothScroll);
+  run(window.initScrollReveal);
+  run(window.initTagHover);
 
   // Desktop-only interactions
   if (isDesktop) {
     if (!document.body.classList.contains('cursor--disabled')) {
-      initCursor();
+      run(window.initCursor);
     }
-    initCardTilt();
-    initMagneticButtons();
+    run(window.initCardTilt);
+    run(window.initMagneticButtons);
   }
 
   // Particles + kind-words gradient run on both desktop and mobile
   // (mobile uses gyroscope/ambient mode instead of mouse)
-  initParticles();
-  initKindWordsGradient();
-  initKindWordsVibes();
-  initParallax();
+  run(window.initParticles);
+  run(window.initKindWordsGradient);
+  run(window.initKindWordsVibes);
+  run(window.initParallax);
 
   // Interactive features
-  initStickers();
-  initDraw();
-  initDarkMode();
-  initResume();
+  run(window.initStickers);
+  run(window.initDraw);
+  run(window.initDarkMode);
+  run(window.initResume);
 });
