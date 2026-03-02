@@ -20,6 +20,9 @@ console.log(
 document.addEventListener('DOMContentLoaded', () => {
   const isDesktop = window.innerWidth > 768;
 
+  // Consent (first — before analytics would fire)
+  initConsent();
+
   // Settings (early, so saved prefs apply before other modules)
   initSettings();
 
