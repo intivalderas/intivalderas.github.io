@@ -223,6 +223,64 @@ window.initSettings = function () {
     });
   }
 
+  // --- Analytics / Privacy toggle ---
+  var analyticsToggle = document.getElementById('settingAnalytics');
+  var cookieDetailsBtn = document.getElementById('settingsCookieDetails');
+
+  // Sync initial state from localStorage
+  var consentValue = null;
+  try { consentValue = localStorage.getItem('cookie-consent'); } catch (e) {}
+  if (analyticsToggle) {
+    analyticsToggle.checked = consentValue === 'accepted';
+  }
+
+  // Toggle analytics on/off
+  if (analyticsToggle) {
+    analyticsToggle.addEventListener('change', function () {
+      if (analyticsToggle.checked) {
+        try { localStorage.setItem('cookie-consent', 'accepted'); } catch (e) {}
+        // Load PageSense if not already loaded
+        var psUrl = 'https://cdn-eu.pagesense.io/js/valderas/9cebd5d067e944efbf91fdc07ac8407c.js';
+        if (!document.querySelector('script[src="' + psUrl + '"]')) {
+          var s = document.createElement('script');
+          s.src = psUrl;
+          s.async = true;
+          document.head.appendChild(s);
+        }
+      } else {
+        try { localStorage.setItem('cookie-consent', 'declined'); } catch (e) {}
+      }
+      // Hide banner if visible
+      var banner = document.getElementById('cookieBanner');
+      if (banner && banner.classList.contains('consent-banner--visible')) {
+        banner.classList.remove('consent-banner--visible');
+        var details = document.getElementById('cookieDetails');
+        if (details) details.setAttribute('hidden', '');
+        banner.addEventListener('transitionend', function handler() {
+          banner.setAttribute('hidden', '');
+          banner.removeEventListener('transitionend', handler);
+        });
+      }
+    });
+  }
+
+  // "What gets tracked?" — show banner with details expanded
+  if (cookieDetailsBtn) {
+    cookieDetailsBtn.addEventListener('click', function () {
+      var banner = document.getElementById('cookieBanner');
+      var details = document.getElementById('cookieDetails');
+      if (banner) {
+        banner.removeAttribute('hidden');
+        banner.offsetHeight;
+        banner.classList.add('consent-banner--visible');
+      }
+      if (details) details.removeAttribute('hidden');
+      // Close settings panel
+      panel.classList.remove('settings__panel--open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  }
+
   // Expose sync method for dark mode easter egg
   window.syncDarkModeToggle = function (isDark) {
     if (darkToggle) darkToggle.checked = isDark;

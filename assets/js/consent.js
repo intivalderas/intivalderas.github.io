@@ -21,6 +21,8 @@ window.initConsent = function initConsent() {
   var acceptBtn = document.getElementById('cookieAccept');
   var declineBtn = document.getElementById('cookieDecline');
   var settingsBtn = document.getElementById('cookieSettings');
+  var learnMoreBtn = document.getElementById('cookieLearnMore');
+  var detailsPanel = document.getElementById('cookieDetails');
 
   if (!banner) return;
 
@@ -42,10 +44,16 @@ window.initConsent = function initConsent() {
 
   function hideBanner() {
     banner.classList.remove('consent-banner--visible');
+    // Collapse details when hiding
+    if (detailsPanel) detailsPanel.setAttribute('hidden', '');
     banner.addEventListener('transitionend', function handler() {
       banner.setAttribute('hidden', '');
       banner.removeEventListener('transitionend', handler);
     });
+  }
+
+  function showDetails() {
+    if (detailsPanel) detailsPanel.removeAttribute('hidden');
   }
 
   function setConsent(value) {
@@ -61,27 +69,50 @@ window.initConsent = function initConsent() {
     setConsent('accepted');
     hideBanner();
     loadPageSense();
+    window.syncAnalyticsToggle(true);
   });
 
   declineBtn.addEventListener('click', function () {
     setConsent('declined');
     hideBanner();
+    window.syncAnalyticsToggle(false);
   });
 
-  // Footer "Cookie settings" link — re-show banner
+  // "Learn more" toggle
+  if (learnMoreBtn && detailsPanel) {
+    learnMoreBtn.addEventListener('click', function () {
+      if (detailsPanel.hasAttribute('hidden')) {
+        showDetails();
+      } else {
+        detailsPanel.setAttribute('hidden', '');
+      }
+    });
+  }
+
+  // Footer "Cookie settings" link — re-show banner with details expanded
   if (settingsBtn) {
     settingsBtn.addEventListener('click', function (e) {
       e.preventDefault();
       localStorage.removeItem(STORAGE_KEY);
       showBanner();
+      showDetails();
     });
   }
+
+  // Sync the settings analytics toggle from banner actions
+  window.syncAnalyticsToggle = function (accepted) {
+    var analyticsToggle = document.getElementById('settingAnalytics');
+    if (analyticsToggle) analyticsToggle.checked = accepted;
+  };
 
   // Init: check stored preference
   var consent = getConsent();
   if (consent === 'accepted') {
     loadPageSense();
-  } else if (consent !== 'declined') {
+    window.syncAnalyticsToggle(true);
+  } else if (consent === 'declined') {
+    window.syncAnalyticsToggle(false);
+  } else {
     showBanner();
   }
 

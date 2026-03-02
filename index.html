@@ -108,6 +108,18 @@
                 </label>
               </div>
             </div>
+            <div class="settings__separator"></div>
+            <div class="settings__group">
+              <span class="settings__group-label">Privacy</span>
+              <div class="settings__item">
+                <label class="settings__label" for="settingAnalytics">Analytics</label>
+                <label class="settings__switch">
+                  <input type="checkbox" id="settingAnalytics">
+                  <span class="settings__slider"></span>
+                </label>
+              </div>
+              <button class="settings__details-link" id="settingsCookieDetails" type="button">What gets tracked?</button>
+            </div>
           </div>
         </div>
         <!-- Make a mess: stickers + drawing tools (hidden until ready) -->
@@ -545,11 +557,40 @@
     <div class="consent-banner__inner">
       <div class="consent-banner__text">
         <span class="consent-banner__label label">Cookies</span>
-        <p>This site uses analytics cookies to understand how visitors interact with it. No tracking without your permission.</p>
+        <p>This site uses analytics cookies to understand how visitors interact with it. No tracking without your permission.
+          <button class="consent-banner__learn-more" id="cookieLearnMore" type="button">Learn more</button>
+        </p>
       </div>
       <div class="consent-banner__actions">
         <button class="consent-banner__btn consent-banner__btn--accept" id="cookieAccept" type="button">Accept</button>
         <button class="consent-banner__btn consent-banner__btn--decline" id="cookieDecline" type="button">Decline</button>
+      </div>
+    </div>
+    <div class="consent-banner__details" id="cookieDetails" hidden>
+      <div class="consent-banner__details-inner">
+        <h3 class="consent-banner__details-title">What gets tracked</h3>
+        <table class="consent-banner__table">
+          <thead>
+            <tr><th>Tool</th><th>Data collected</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Zoho PageSense</td>
+              <td>Page views, scroll depth, session duration, device & browser type, country (from IP)</td>
+              <td>Understand which content visitors engage with</td>
+            </tr>
+            <tr>
+              <td>Custom events</td>
+              <td>Clicks on contact email, social links, resume open & download</td>
+              <td>See which call-to-actions resonate</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="consent-banner__details-notes">
+          <p><strong>No personal data</strong> is collected — no names, emails, or fingerprinting.</p>
+          <p>Data is processed in the EU via Zoho's European data centre.</p>
+          <p>Declining removes all analytics. The site works the same either way.</p>
+        </div>
       </div>
     </div>
   </div>
