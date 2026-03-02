@@ -1,0 +1,60 @@
+/*
+ * cursor.css
+ * ----------
+ * Custom dot + follower cursor that replaces the native pointer.
+ * Includes hover state expansion and the cursor-disabled utility.
+ */
+
+/* --- Custom Cursor --- */
+.cursor {
+  width: 8px;
+  height: 8px;
+  background: var(--black);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s var(--ease-out-expo),
+              opacity 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-follower {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--black);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.4s var(--ease-out-expo),
+              width 0.3s var(--ease-out-expo),
+              height 0.3s var(--ease-out-expo),
+              opacity 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+.cursor--hover .cursor {
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.cursor--hover .cursor-follower {
+  width: 64px;
+  height: 64px;
+  background: rgba(10, 10, 10, 0.05);
+  border-color: var(--black);
+}
+
+/* --- Custom cursor disabled --- */
+body.cursor--disabled {
+  cursor: auto;
+}
+
+body.cursor--disabled #cursor,
+body.cursor--disabled #cursorFollower {
+  display: none !important;
+}

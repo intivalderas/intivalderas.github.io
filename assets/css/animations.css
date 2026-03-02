@@ -1,0 +1,140 @@
+/*
+ * animations.css
+ * --------------
+ * Shared keyframe animations (fadeUp, fadeIn, scrollLine),
+ * magnetic button effect, the page-load reveal overlay,
+ * and responsive breakpoints for the core site layout
+ * (sidebar, hero, grids, cursor visibility).
+ */
+
+/* --- Magnetic button effect --- */
+.magnetic-btn {
+  position: relative;
+  transition: transform 0.3s var(--ease-out-expo);
+}
+
+/* --- Animations --- */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes scrollLine {
+  0% { top: -100%; }
+  50% { top: 100%; }
+  50.01% { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    display: block;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+
+  .hero {
+    padding: 7rem 1.5rem 3rem;
+  }
+
+  .section {
+    padding: 5rem 1.5rem;
+  }
+
+  .kind-words__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kind-words__card {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .kind-words__photo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__scroll {
+    display: none;
+  }
+
+  .cursor,
+  .cursor-follower {
+    display: none;
+  }
+
+  body {
+    cursor: auto;
+  }
+
+  .contact__links {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__title {
+    font-size: 2rem;
+  }
+
+  .section__title {
+    font-size: 1.8rem;
+  }
+
+  .contact__email {
+    font-size: 1rem;
+  }
+}
+
+/* --- Loading state (page transition feel) --- */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--white);
+  z-index: 9999;
+  pointer-events: none;
+  animation: pageReveal 0.8s var(--ease-out-expo) 0.1s forwards;
+}
+
+@keyframes pageReveal {
+  to {
+    transform: translateY(-100%);
+  }
+}

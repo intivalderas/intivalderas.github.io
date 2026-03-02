@@ -4,39 +4,7 @@
    ========================================= */
 
 window.initNav = function () {
-  const sidebar = document.getElementById('sidebar');
-  const toggle = document.getElementById('sidebarToggle');
   const scrollIndicator = document.getElementById('scrollIndicator');
-
-  if (!sidebar || !toggle) return;
-
-  function collapseSidebar() {
-    sidebar.classList.add('sidebar--collapsed');
-    toggle.setAttribute('aria-expanded', 'false');
-  }
-
-  function expandSidebar() {
-    sidebar.classList.remove('sidebar--collapsed');
-    toggle.setAttribute('aria-expanded', 'true');
-  }
-
-  toggle.addEventListener('click', () => {
-    sidebar.classList.contains('sidebar--collapsed') ? expandSidebar() : collapseSidebar();
-  });
-
-  // Mobile: close on click outside
-  document.addEventListener('click', (e) => {
-    if (window.innerWidth <= 768 && !sidebar.classList.contains('sidebar--collapsed') && !sidebar.contains(e.target) && e.target !== toggle) {
-      collapseSidebar();
-    }
-  });
-
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !sidebar.classList.contains('sidebar--collapsed')) {
-      collapseSidebar();
-    }
-  });
 
   // Scroll indicator fade
   window.addEventListener('scroll', () => {
@@ -46,13 +14,6 @@ window.initNav = function () {
     }
   });
 
-  // Mobile: start collapsed
-  if (window.innerWidth <= 768) {
-    collapseSidebar();
-  }
-
-  // Expose for other modules
-  window.closeSidebar = collapseSidebar;
 };
 
 

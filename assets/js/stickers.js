@@ -222,6 +222,10 @@
 
           stickerCanvas.appendChild(sticker);
 
+          var stickerLabel = type === 'postit' ? 'post-it' : emoji;
+          console.log('[sticker] placed:', stickerLabel);
+          window.psTrack('Sticker_' + (type === 'postit' ? 'PostIt' : emoji));
+
           // Delete single sticker
           sticker.querySelector('.sticker__delete').addEventListener('click', (e) => {
             e.stopPropagation();

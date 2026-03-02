@@ -1,0 +1,51 @@
+/*
+ * components.css
+ * --------------
+ * Small reusable UI primitives: mono labels (pill badges)
+ * and tag chips used throughout the site.
+ */
+
+/* --- Labels (signature element) --- */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  padding: 0.35em 0.75em;
+  border: 1px solid var(--gray-200);
+  border-radius: 100px;
+  display: inline-block;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.label:hover {
+  color: var(--black);
+  border-color: var(--black);
+}
+
+/* --- Tags --- */
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+  padding: 0.3em 0.7em;
+  border: 1px solid var(--gray-200);
+  border-radius: 100px;
+  display: inline-block;
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.tag:hover {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+  transform: translateY(-2px);
+}
+
+.tag--sm {
+  font-size: 0.6rem;
+  padding: 0.2em 0.55em;
+}

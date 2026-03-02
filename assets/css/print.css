@@ -1,0 +1,121 @@
+/*
+ * print.css
+ * ---------
+ * Print stylesheet: hides all site chrome (sidebar, hero,
+ * overlays, consent banner) and shows only the resume in a
+ * compact, ink-friendly layout optimised for A4 paper.
+ */
+
+@media print {
+  /* Hide everything except resume */
+  .sidebar,
+  .hero,
+  .marquee,
+  .section--about,
+  .section--kind-words,
+  .section--contact,
+  .footer,
+  .consent-banner,
+  .sticker-canvas,
+  .draw-canvas,
+  .noise-overlay,
+  #particleCanvas,
+  .cursor,
+  .cursor-follower,
+  .resume__actions {
+    display: none !important;
+  }
+
+  /* Show resume */
+  .resume {
+    display: block !important;
+    padding: 0 !important;
+    max-width: none;
+  }
+
+  .resume__document {
+    border: none;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+    cursor: auto;
+    font-size: 14px;
+    display: block;
+  }
+
+  body::before {
+    display: none;
+  }
+
+  /* Compact header — inline layout */
+  .resume__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    text-align: left;
+  }
+
+  .resume__name {
+    font-size: 1.3rem;
+    margin-bottom: 0;
+  }
+
+  .resume__title {
+    margin-bottom: 0;
+    font-size: 0.85rem;
+  }
+
+  .resume__contact {
+    text-align: right;
+  }
+
+  /* Compact sections */
+  .resume__section {
+    margin-bottom: 1.25rem;
+    break-inside: avoid;
+  }
+
+  .resume__section-title {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.3rem;
+  }
+
+  .resume__entry {
+    padding: 0.35rem 0;
+    break-inside: avoid;
+  }
+
+  .resume__entry:hover {
+    background: none;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .resume__skills {
+    gap: 0.3rem;
+  }
+
+  .tag {
+    border-color: #ccc;
+    color: #333;
+    font-size: 0.65rem;
+    padding: 0.2em 0.5em;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
+  @page {
+    margin: 1.5cm;
+    size: A4;
+  }
+}

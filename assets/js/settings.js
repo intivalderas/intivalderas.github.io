@@ -99,6 +99,8 @@ window.initSettings = function () {
   if (darkToggle) {
     darkToggle.addEventListener('change', function () {
       var isDark = darkToggle.checked;
+      console.log('[setting] dark mode:', isDark ? 'on' : 'off');
+      window.psTrack('Setting_DarkMode_' + (isDark ? 'On' : 'Off'));
       document.body.classList.toggle('dark-mode', isDark);
       localStorage.setItem('setting-dark-mode', String(isDark));
 
@@ -122,6 +124,8 @@ window.initSettings = function () {
       if (canvas) {
         canvas.style.display = particlesToggle.checked ? '' : 'none';
       }
+      console.log('[setting] particles:', particlesToggle.checked ? 'on' : 'off');
+      window.psTrack('Setting_Particles_' + (particlesToggle.checked ? 'On' : 'Off'));
       localStorage.setItem('setting-particles', String(particlesToggle.checked));
       uncheckMasterIfNeeded();
     });
@@ -130,6 +134,8 @@ window.initSettings = function () {
   // Motion effects
   if (motionToggle) {
     motionToggle.addEventListener('change', function () {
+      console.log('[setting] motion:', motionToggle.checked ? 'on' : 'off');
+      window.psTrack('Setting_Motion_' + (motionToggle.checked ? 'On' : 'Off'));
       document.body.classList.toggle('reduced-effects', !motionToggle.checked);
       localStorage.setItem('setting-motion', String(motionToggle.checked));
       uncheckMasterIfNeeded();
@@ -139,6 +145,8 @@ window.initSettings = function () {
   // Custom cursor
   if (cursorToggle) {
     cursorToggle.addEventListener('change', function () {
+      console.log('[setting] cursor:', cursorToggle.checked ? 'on' : 'off');
+      window.psTrack('Setting_Cursor_' + (cursorToggle.checked ? 'On' : 'Off'));
       document.body.classList.toggle('cursor--disabled', !cursorToggle.checked);
       localStorage.setItem('setting-cursor', String(cursorToggle.checked));
       uncheckMasterIfNeeded();
@@ -160,6 +168,8 @@ window.initSettings = function () {
       } else {
         if (window.Gyroscope) Gyroscope.deactivate();
       }
+      console.log('[setting] gyroscope:', gyroToggle.checked ? 'on' : 'off');
+      window.psTrack('Setting_Gyroscope_' + (gyroToggle.checked ? 'On' : 'Off'));
       localStorage.setItem('setting-gyroscope', String(gyroToggle.checked));
       uncheckMasterIfNeeded();
     });
@@ -182,6 +192,8 @@ window.initSettings = function () {
   if (disableAllToggle) {
     disableAllToggle.addEventListener('change', function () {
       var disabling = disableAllToggle.checked;
+      console.log('[setting] disable all:', disabling ? 'on' : 'off');
+      window.psTrack('Setting_DisableAll_' + (disabling ? 'On' : 'Off'));
       localStorage.setItem('setting-disable-all', String(disabling));
 
       if (disabling) {
@@ -237,6 +249,7 @@ window.initSettings = function () {
   // Toggle analytics on/off
   if (analyticsToggle) {
     analyticsToggle.addEventListener('change', function () {
+      console.log('[setting] analytics:', analyticsToggle.checked ? 'on' : 'off');
       if (analyticsToggle.checked) {
         try { localStorage.setItem('cookie-consent', 'accepted'); } catch (e) {}
         // Load PageSense if not already loaded

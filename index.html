@@ -37,9 +37,6 @@
 
   <!-- Sidebar Navigation -->
   <aside class="sidebar" id="sidebar" aria-label="Main navigation">
-    <button class="sidebar__toggle" id="sidebarToggle" type="button" aria-label="Toggle navigation" aria-expanded="true">
-      <span></span><span></span>
-    </button>
     <div class="sidebar__content">
       <nav class="sidebar__nav">
         <a href="index.html" class="sidebar__logo">Inti Valderas Caro</a>
@@ -50,13 +47,11 @@
         </div>
       </nav>
       <div class="sidebar__bottom">
+        <a href="accessibility.html" class="sidebar__link sidebar__link--small">Accessibility</a>
+        <button class="sidebar__link sidebar__link--small" id="cookieSettings" type="button">Cookie settings</button>
         <!-- Settings -->
         <div class="settings" id="settingsPanel">
-          <button class="sidebar__link sidebar__link--btn settings__toggle" id="settingsToggle" type="button" aria-label="Settings" aria-expanded="false" aria-controls="settingsMenu">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
-            </svg>
-          </button>
+          <button class="sidebar__link sidebar__link--small" id="settingsToggle" type="button" aria-expanded="false" aria-controls="settingsMenu">Toggle things</button>
           <div class="settings__menu" id="settingsMenu">
             <div class="settings__group">
               <span class="settings__group-label">Theme</span>
@@ -159,6 +154,7 @@
         </div>
         -->
       </div>
+      <p class="sidebar__copyright">&copy; 2026 Inti Valderas Caro</p>
     </div>
   </aside>
 
@@ -532,10 +528,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <p>© 2026 Inti Valderas Caro</p>
-    <button class="footer__cookie-settings" id="cookieSettings" type="button">Cookie settings</button>
-  </footer>
+  <footer class="footer"></footer>
 
   <canvas class="draw-canvas" id="drawCanvas" aria-hidden="true"></canvas>
   <div class="sticker-canvas" id="stickerCanvas"></div>

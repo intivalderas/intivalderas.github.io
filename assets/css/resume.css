@@ -1,0 +1,235 @@
+/*
+ * resume.css
+ * ----------
+ * Resume/CV view: hidden by default, shown via body.resume-mode.
+ * Document layout with header, timeline entries, skills grid,
+ * action buttons (back/print), and mobile-responsive stacking.
+ */
+
+/* Hidden by default */
+.resume {
+  display: none;
+}
+
+/* Resume mode: hide site, show resume */
+body.resume-mode .hero,
+body.resume-mode .marquee,
+body.resume-mode .section--about,
+body.resume-mode .section--kind-words,
+body.resume-mode .section--contact,
+body.resume-mode .sticker-canvas,
+body.resume-mode .draw-canvas,
+body.resume-mode .noise-overlay,
+body.resume-mode #particleCanvas,
+body.resume-mode .footer,
+body.resume-mode .consent-banner {
+  display: none !important;
+}
+
+body.resume-mode .resume {
+  display: block;
+}
+
+
+/* Resume layout */
+.resume {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem 3rem;
+}
+
+.resume__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.resume__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.6em 1.2em;
+  border: 1px solid var(--gray-200);
+  border-radius: 100px;
+  background: none;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.resume__btn:hover {
+  border-color: var(--black);
+  color: var(--black);
+  transform: translateY(-2px);
+}
+
+.resume__btn--print {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+.resume__btn--print:hover {
+  background: var(--gray-800);
+  color: var(--white);
+}
+
+/* Resume document */
+.resume__document {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 3rem;
+}
+
+.resume__header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.resume__name {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
+}
+
+.resume__title {
+  font-size: 1rem;
+  color: var(--gray-600);
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.resume__contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--gray-600);
+}
+
+.resume__contact a {
+  color: var(--black);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.resume__contact a:hover {
+  color: var(--gray-600);
+}
+
+.resume__sep {
+  color: var(--gray-200);
+}
+
+/* Resume sections */
+.resume__section {
+  margin-bottom: 2.5rem;
+}
+
+.resume__section-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+/* Timeline entries */
+.resume__timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.resume__entry {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 1.5rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--gray-100);
+  transition: background 0.2s ease;
+}
+
+.resume__entry:last-child {
+  border-bottom: none;
+}
+
+.resume__entry:hover {
+  background: var(--gray-100);
+  margin: 0 -0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-radius: 4px;
+}
+
+.resume__period {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--gray-400);
+  padding-top: 0.15rem;
+  white-space: nowrap;
+}
+
+.resume__role {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 0.1rem;
+}
+
+.resume__company {
+  font-size: 0.8rem;
+  color: var(--gray-600);
+}
+
+/* Skills in resume */
+.resume__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* Responsive resume */
+@media (max-width: 768px) {
+  .resume {
+    padding: 6rem 1.5rem 3rem;
+  }
+
+  .resume__document {
+    padding: 2rem 1.5rem;
+  }
+
+  .resume__entry {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .resume__period {
+    font-size: 0.65rem;
+  }
+
+  .resume__contact {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .resume__sep {
+    display: none;
+  }
+
+}

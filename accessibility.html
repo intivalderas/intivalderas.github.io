@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessibility — Inti Valderas Caro</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .article { max-width: 680px; margin: 0 auto; padding: 10rem 2rem 6rem; }
+    .article__back { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--gray-400); margin-bottom: 3rem; transition: color 0.3s ease; }
+    .article__back:hover { color: var(--black); }
+    .article__title { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 2rem; }
+    .article p { color: var(--gray-800); line-height: 1.9; margin-bottom: 1.5rem; font-size: 1.05rem; }
+    .article h2 { font-size: 1.3rem; font-weight: 600; margin: 3rem 0 1rem; }
+    .article ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; }
+    .article li { color: var(--gray-800); line-height: 1.9; font-size: 1.05rem; margin-bottom: 0.5rem; }
+    .article a { text-decoration: underline; text-underline-offset: 0.2em; }
+    .article__updated { font-family: var(--font-mono); font-size: 0.65rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 3rem; }
+  </style>
+</head>
+<body>
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav__logo">Inti Valderas Caro</a>
+    <div class="nav__links">
+      <a href="index.html#about" class="nav__link" data-label="Get to know me">About</a>
+      <a href="index.html#contact" class="nav__link" data-label="Let's talk">Contact</a>
+    </div>
+  </nav>
+
+  <article class="article">
+    <a href="index.html" class="article__back">&larr; Back to overview</a>
+
+    <h1 class="article__title">Accessibility Statement</h1>
+
+    <h2>Commitment</h2>
+    <p>
+      I'm committed to making this website accessible to everyone.
+      The site targets conformance with <strong>WCAG 2.1 Level AA</strong> and is continuously improved based on testing and feedback.
+    </p>
+
+    <h2>What we do</h2>
+    <ul>
+      <li>Semantic HTML for clear document structure and landmarks</li>
+      <li>Full keyboard navigation across all interactive elements</li>
+      <li>A skip-to-content link for bypassing navigation</li>
+      <li>Sufficient color contrast ratios across light and dark themes</li>
+      <li>Screen reader support with ARIA labels and roles where needed</li>
+      <li>Respect for <code>prefers-reduced-motion</code> — animations are disabled automatically for users who prefer reduced motion</li>
+      <li>A settings panel to manually disable particles, motion effects, and the custom cursor</li>
+    </ul>
+
+    <h2>Known limitations</h2>
+    <ul>
+      <li><strong>Custom cursor</strong> — A decorative custom cursor replaces the default on desktop. It can be disabled via the settings panel (gear icon in the sidebar) or is automatically hidden on touch devices.</li>
+      <li><strong>Canvas particles</strong> — A decorative particle effect runs on a background canvas element. It is marked <code>aria-hidden</code> and can be disabled via settings.</li>
+      <li><strong>Motion effects</strong> — Scroll-based animations and text effects are present throughout the site. These are automatically disabled when <code>prefers-reduced-motion</code> is set in your operating system, and can also be toggled off in the settings panel.</li>
+    </ul>
+
+    <h2>Feedback</h2>
+    <p>
+      If you encounter any accessibility barriers on this site, I'd love to hear about it.
+      Please reach out at <a href="mailto:inti@valderas.be">inti@valderas.be</a> and I'll do my best to address it.
+    </p>
+
+    <p class="article__updated">Last updated — March 2026</p>
+  </article>
+
+  <footer class="footer">
+    <p>&copy; 2026 Inti Valderas Caro</p>
+    <button class="footer__cookie-settings" id="cookieSettings" type="button">Cookie settings</button>
+  </footer>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-follower" id="cursorFollower" aria-hidden="true"></div>
+
+  <!-- Cookie Consent Banner -->
+  <div class="consent-banner" id="cookieBanner" role="dialog" aria-label="Cookie consent" hidden>
+    <div class="consent-banner__inner">
+      <div class="consent-banner__text">
+        <span class="consent-banner__label label">Cookies</span>
+        <p>This site uses analytics cookies to understand how visitors interact with it. No tracking without your permission.
+          <button class="consent-banner__learn-more" id="cookieLearnMore" type="button">Learn more</button>
+        </p>
+      </div>
+      <div class="consent-banner__actions">
+        <button class="consent-banner__btn consent-banner__btn--accept" id="cookieAccept" type="button">Accept</button>
+        <button class="consent-banner__btn consent-banner__btn--decline" id="cookieDecline" type="button">Decline</button>
+      </div>
+    </div>
+    <div class="consent-banner__details" id="cookieDetails" hidden>
+      <div class="consent-banner__details-inner">
+        <h3 class="consent-banner__details-title">What gets tracked</h3>
+        <table class="consent-banner__table">
+          <thead>
+            <tr><th>Tool</th><th>Data collected</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Zoho PageSense</td>
+              <td>Page views, scroll depth, session duration, device & browser type, country (from IP)</td>
+              <td>Understand which content visitors engage with</td>
+            </tr>
+            <tr>
+              <td>Custom events</td>
+              <td>Clicks on contact email, social links, resume open & download</td>
+              <td>See which call-to-actions resonate</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="consent-banner__details-notes">
+          <p><strong>No personal data</strong> is collected — no names, emails, or fingerprinting.</p>
+          <p>Data is processed in the EU via Zoho's European data centre.</p>
+          <p>Declining removes all analytics. The site works the same either way.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/consent.js"></script>
+  <script src="assets/js/cursor.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

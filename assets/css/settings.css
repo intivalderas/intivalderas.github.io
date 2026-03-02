@@ -1,0 +1,184 @@
+/*
+ * settings.css
+ * ------------
+ * Floating settings panel (gear button + popover menu),
+ * toggle switches, reduced-effects mode overrides that
+ * disable animations site-wide when the user opts out.
+ */
+
+/* --- Settings Panel --- */
+.settings {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 200;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.settings__toggle {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-expo);
+  color: var(--gray-600);
+}
+
+.settings__toggle:hover {
+  border-color: var(--black);
+  color: var(--black);
+  transform: rotate(45deg);
+}
+
+.settings__menu {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  min-width: 180px;
+  opacity: 0;
+  transform: translateY(10px) scale(0.95);
+  pointer-events: none;
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.settings__panel--open .settings__menu {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.settings__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+}
+
+.settings__item + .settings__item {
+  border-top: 1px solid var(--gray-100);
+}
+
+.settings__group {
+  padding: 0.2rem 0;
+}
+
+.settings__group-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: 0.15rem;
+}
+
+.settings__separator {
+  height: 1px;
+  background: var(--gray-200);
+  margin: 0.25rem 0;
+}
+
+.settings__label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+  cursor: pointer;
+}
+
+/* Toggle switch */
+.settings__switch {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.settings__switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.settings__slider {
+  position: absolute;
+  inset: 0;
+  background: var(--gray-200);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.settings__slider::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 3px;
+  bottom: 3px;
+  background: var(--white);
+  border-radius: 50%;
+  transition: transform 0.3s var(--ease-out-expo);
+}
+
+.settings__switch input:checked + .settings__slider {
+  background: var(--black);
+}
+
+.settings__switch input:checked + .settings__slider::before {
+  transform: translateX(16px);
+}
+
+.settings__switch input:focus-visible + .settings__slider {
+  outline: 2px solid var(--black);
+  outline-offset: 2px;
+  border-radius: 20px;
+}
+
+/* --- Reduced effects mode --- */
+body.reduced-effects .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+body.reduced-effects .magnetic-btn {
+  transition: none;
+}
+
+body.reduced-effects .magnetic-btn:hover {
+  transform: none !important;
+}
+
+body.reduced-effects .kind-words__card {
+  transition: none;
+}
+
+body.reduced-effects .kind-words__card:hover {
+  transform: none;
+}
+
+body.reduced-effects .marquee__track {
+  animation-play-state: paused;
+}
+
+body.reduced-effects .hero__label,
+body.reduced-effects .hero__title,
+body.reduced-effects .hero__subtitle,
+body.reduced-effects .hero__tags,
+body.reduced-effects .hero__cta {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}

@@ -2,7 +2,6 @@
    Drawing Tool — Pencil & Marker
    Lives inside the "Make a mess" sticker tray
    ========================================= */
-
 (function () {
   window.initDraw = function () {
     var canvas = document.getElementById('drawCanvas');

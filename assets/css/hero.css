@@ -1,0 +1,126 @@
+/*
+ * hero.css
+ * --------
+ * Full-viewport hero section: title, subtitle, CTA button,
+ * tag row, and the animated scroll indicator.
+ */
+
+/* --- Hero --- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 3rem;
+  position: relative;
+}
+
+.hero__content {
+  max-width: 700px;
+}
+
+.hero__label {
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp 0.6s var(--ease-out-expo) 0.2s forwards;
+}
+
+.hero__title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-out-expo) 0.4s forwards;
+}
+
+.hero__subtitle {
+  font-size: 1.1rem;
+  color: var(--gray-600);
+  max-width: 480px;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-out-expo) 0.6s forwards;
+}
+
+.hero__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease-out-expo) 0.8s forwards;
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.9em 1.8em;
+  border: 1px solid var(--black);
+  border-radius: 100px;
+  transition: all 0.4s var(--ease-out-expo);
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease-out-expo) 1s forwards;
+}
+
+.hero__cta:hover {
+  background: var(--black);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.hero__cta svg {
+  transition: transform 0.3s var(--ease-out-expo);
+}
+
+.hero__cta:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  opacity: 0;
+  animation: fadeIn 1s ease 1.5s forwards;
+}
+
+.hero__scroll span {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  writing-mode: vertical-rl;
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 60px;
+  background: var(--gray-200);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--black);
+  animation: scrollLine 2s ease-in-out infinite;
+}
