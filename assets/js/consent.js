@@ -16,7 +16,6 @@ window.psTrack = function psTrack(eventName) {
 window.initConsent = function initConsent() {
   var STORAGE_KEY = 'cookie-consent';
   var PAGESENSE_URL = 'https://cdn-eu.pagesense.io/js/valderas/9cebd5d067e944efbf91fdc07ac8407c.js';
-  var SALESIQ_URL = 'https://salesiq.zohopublic.eu/widget?wc=siqdd436875374126491da9f185b2e8721665ca9ab035d026c28b1de661703adb79';
 
   var banner = document.getElementById('cookieBanner');
   var acceptBtn = document.getElementById('cookieAccept');
@@ -33,28 +32,6 @@ window.initConsent = function initConsent() {
     var s = document.createElement('script');
     s.src = PAGESENSE_URL;
     s.async = true;
-    document.head.appendChild(s);
-  }
-
-  function loadSalesIQ() {
-    if (document.querySelector('script[src="' + SALESIQ_URL + '"]')) return;
-    // Inject CSS to hide the chat widget permanently
-    if (!document.getElementById('zsiq-hide')) {
-      var style = document.createElement('style');
-      style.id = 'zsiq-hide';
-      style.textContent = '.zsiq_floatmain, .zls-sptwndw, #zsiq_float, .zsiq_cnt, .zsiq_theme1, [id^="siq"], .siqaio { display: none !important; visibility: hidden !important; }';
-      document.head.appendChild(style);
-    }
-    window.$zoho = window.$zoho || {};
-    window.$zoho.salesiq = window.$zoho.salesiq || {
-      ready: function () {
-        window.$zoho.salesiq.floatwindow.visible('hide');
-      }
-    };
-    var s = document.createElement('script');
-    s.src = SALESIQ_URL;
-    s.async = true;
-    s.id = 'zsiqscript';
     document.head.appendChild(s);
   }
 
@@ -92,7 +69,6 @@ window.initConsent = function initConsent() {
     setConsent('accepted');
     hideBanner();
     loadPageSense();
-    loadSalesIQ();
     window.syncAnalyticsToggle(true);
   });
 
@@ -133,7 +109,6 @@ window.initConsent = function initConsent() {
   var consent = getConsent();
   if (consent === 'accepted') {
     loadPageSense();
-    loadSalesIQ();
     window.syncAnalyticsToggle(true);
   } else if (consent === 'declined') {
     window.syncAnalyticsToggle(false);

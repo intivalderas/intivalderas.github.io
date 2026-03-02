@@ -1,6 +1,6 @@
 /* ============================================
    Contact Form — "Pick two" toggles + mailto
-   Pushes visitor info to Zoho SalesIQ if loaded.
+   Identifies visitor in PageSense on submit.
    ============================================ */
 
 window.initContact = function initContact() {
@@ -73,14 +73,11 @@ window.initContact = function initContact() {
       ? active.slice().sort().map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' + ')
       : '';
 
-    // Push to Zoho SalesIQ (silently fails if not loaded / no consent)
+    // Identify visitor in PageSense (silently fails if not loaded / no consent)
     try {
-      if (window.$zoho && window.$zoho.salesiq) {
-        window.$zoho.salesiq.visitor.name(name);
-        window.$zoho.salesiq.visitor.email(email);
-        if (combo) window.$zoho.salesiq.visitor.info({ 'Pick two': combo });
-      }
-    } catch (err) { /* SalesIQ not loaded — that's fine */ }
+      window.pagesense = window.pagesense || [];
+      window.pagesense.push(['identifyUser', email, { name: name }]);
+    } catch (err) { /* PageSense not loaded — that's fine */ }
 
     // Track event via PageSense
     if (typeof window.psTrack === 'function') window.psTrack('Contact_Form');
