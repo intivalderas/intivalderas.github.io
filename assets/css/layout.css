@@ -455,6 +455,23 @@ body.draw-marker .draw-tool__colors {
   .main-content {
     width: 100%;
   }
+
+  /* Settings menu: inline within sidebar instead of popover to the right */
+  .sidebar__bottom .settings__menu {
+    position: static;
+    left: auto;
+    bottom: auto;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    padding: 0 0 0 0.5rem;
+    transform: none;
+    min-width: 0;
+  }
+
+  .sidebar__bottom .settings__panel--open .settings__menu {
+    transform: none;
+  }
 }
 
 /* --- Draw canvas --- */
