@@ -36,4 +36,4 @@ organisations like KBC, Smooth Sailing, Engie, and LUCA School of Arts.
 This site is a zero-dependency static site built with vanilla HTML, CSS, and JavaScript.
 No frameworks, no build steps. Designed and directed by Inti, built by Claude Code.
 
-Source code: https://github.com/intivalderas/intivalderas.github.io
+Source code: https://github.com/intivalderas/valderas.be

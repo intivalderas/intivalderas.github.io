@@ -12,7 +12,7 @@
   ║   Zero dependencies. Zero build steps. Just vibes.       ║
   ║                                                          ║
   ║   Curious how it all works? Come say hi:                 ║
-  ║   https://github.com/intivalderas/intivalderas.github.io ║
+  ║   https://github.com/intivalderas/valderas.be ║
   ║                                                          ║
   ║   (Try triple-clicking the logo. You're welcome.)        ║
   ║                                                          ║
@@ -40,14 +40,91 @@
     <button class="sidebar__toggle" id="sidebarToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
       <span></span><span></span>
     </button>
-    <nav class="sidebar__content">
-      <a href="index.html" class="sidebar__logo">Inti Valderas Caro</a>
-      <div class="sidebar__links">
-        <a href="#about" class="sidebar__link">About</a>
-        <a href="#contact" class="sidebar__link">Contact</a>
-        <button class="sidebar__link sidebar__link--btn" id="resumeToggle" type="button">Resume</button>
+    <div class="sidebar__content">
+      <nav class="sidebar__nav">
+        <a href="index.html" class="sidebar__logo">Inti Valderas Caro</a>
+        <div class="sidebar__links">
+          <a href="#about" class="sidebar__link">About</a>
+          <a href="#contact" class="sidebar__link">Contact</a>
+          <button class="sidebar__link sidebar__link--btn" id="resumeToggle" type="button">Resume</button>
+        </div>
+      </nav>
+      <div class="sidebar__bottom">
+        <!-- Settings -->
+        <div class="settings" id="settingsPanel">
+          <button class="settings__toggle" id="settingsToggle" type="button" aria-label="Settings" aria-expanded="false" aria-controls="settingsMenu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+            </svg>
+          </button>
+          <div class="settings__menu" id="settingsMenu">
+            <div class="settings__group">
+              <span class="settings__group-label">Theme</span>
+              <div class="settings__item">
+                <label class="settings__label" for="settingDarkMode">Dark mode</label>
+                <label class="settings__switch">
+                  <input type="checkbox" id="settingDarkMode">
+                  <span class="settings__slider"></span>
+                </label>
+              </div>
+            </div>
+            <div class="settings__separator"></div>
+            <div class="settings__group">
+              <span class="settings__group-label">Effects</span>
+              <div class="settings__item">
+                <label class="settings__label" for="settingParticles">Particles</label>
+                <label class="settings__switch">
+                  <input type="checkbox" id="settingParticles" checked>
+                  <span class="settings__slider"></span>
+                </label>
+              </div>
+              <div class="settings__item">
+                <label class="settings__label" for="settingMotion">Motion effects</label>
+                <label class="settings__switch">
+                  <input type="checkbox" id="settingMotion" checked>
+                  <span class="settings__slider"></span>
+                </label>
+              </div>
+              <div class="settings__item" id="settingCursorRow">
+                <label class="settings__label" for="settingCursor">Custom cursor</label>
+                <label class="settings__switch">
+                  <input type="checkbox" id="settingCursor" checked>
+                  <span class="settings__slider"></span>
+                </label>
+              </div>
+              <div class="settings__item" id="settingGyroRow">
+                <label class="settings__label" for="settingGyroscope">Gyroscope</label>
+                <label class="settings__switch">
+                  <input type="checkbox" id="settingGyroscope">
+                  <span class="settings__slider"></span>
+                </label>
+              </div>
+              <div class="settings__separator"></div>
+              <div class="settings__item">
+                <label class="settings__label" for="settingDisableAll">Disable all</label>
+                <label class="settings__switch">
+                  <input type="checkbox" id="settingDisableAll">
+                  <span class="settings__slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Stickers -->
+        <div class="sticker-tray" id="stickerTray">
+          <div class="sticker-tray__toggle" id="stickerToggle" role="button" tabindex="0" aria-expanded="false" aria-controls="stickerItems">✦ Stickers</div>
+          <div class="sticker-tray__items" id="stickerItems">
+            <div class="sticker-tray__item" data-sticker="🎨" data-color="#fef3c7" role="button" tabindex="0" aria-label="Place paint palette sticker">🎨</div>
+            <div class="sticker-tray__item" data-sticker="✦" data-color="#e0e7ff" role="button" tabindex="0" aria-label="Place star sticker">✦</div>
+            <div class="sticker-tray__item" data-sticker="💡" data-color="#d1fae5" role="button" tabindex="0" aria-label="Place lightbulb sticker">💡</div>
+            <div class="sticker-tray__item" data-sticker="🚀" data-color="#fce7f3" role="button" tabindex="0" aria-label="Place rocket sticker">🚀</div>
+            <div class="sticker-tray__item" data-sticker="📝" data-color="#fef9c3" data-type="postit" role="button" tabindex="0" aria-label="Place post-it note">📝</div>
+            <div class="sticker-tray__divider" role="separator"></div>
+            <div class="sticker-tray__clear" id="stickerClear" title="Clear all stickers" role="button" tabindex="0">Clear all</div>
+          </div>
+        </div>
       </div>
-    </nav>
+    </div>
   </aside>
 
   <!-- Hero -->
@@ -421,80 +498,6 @@
     <p>© 2026 Inti Valderas Caro</p>
   </footer>
 
-  <!-- Settings Panel -->
-  <div class="settings" id="settingsPanel">
-    <button class="settings__toggle" id="settingsToggle" type="button" aria-label="Settings" aria-expanded="false" aria-controls="settingsMenu">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
-      </svg>
-    </button>
-    <div class="settings__menu" id="settingsMenu">
-      <div class="settings__group">
-        <span class="settings__group-label">Theme</span>
-        <div class="settings__item">
-          <label class="settings__label" for="settingDarkMode">Dark mode</label>
-          <label class="settings__switch">
-            <input type="checkbox" id="settingDarkMode">
-            <span class="settings__slider"></span>
-          </label>
-        </div>
-      </div>
-      <div class="settings__separator"></div>
-      <div class="settings__group">
-        <span class="settings__group-label">Effects</span>
-        <div class="settings__item">
-          <label class="settings__label" for="settingParticles">Particles</label>
-          <label class="settings__switch">
-            <input type="checkbox" id="settingParticles" checked>
-            <span class="settings__slider"></span>
-          </label>
-        </div>
-        <div class="settings__item">
-          <label class="settings__label" for="settingMotion">Motion effects</label>
-          <label class="settings__switch">
-            <input type="checkbox" id="settingMotion" checked>
-            <span class="settings__slider"></span>
-          </label>
-        </div>
-        <div class="settings__item" id="settingCursorRow">
-          <label class="settings__label" for="settingCursor">Custom cursor</label>
-          <label class="settings__switch">
-            <input type="checkbox" id="settingCursor" checked>
-            <span class="settings__slider"></span>
-          </label>
-        </div>
-        <div class="settings__item" id="settingGyroRow">
-          <label class="settings__label" for="settingGyroscope">Gyroscope</label>
-          <label class="settings__switch">
-            <input type="checkbox" id="settingGyroscope">
-            <span class="settings__slider"></span>
-          </label>
-        </div>
-        <div class="settings__separator"></div>
-        <div class="settings__item">
-          <label class="settings__label" for="settingDisableAll">Disable all</label>
-          <label class="settings__switch">
-            <input type="checkbox" id="settingDisableAll">
-            <span class="settings__slider"></span>
-          </label>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Sticker Board -->
-  <div class="sticker-tray" id="stickerTray">
-    <div class="sticker-tray__toggle" id="stickerToggle" role="button" tabindex="0" aria-expanded="false" aria-controls="stickerItems">✦ Stickers</div>
-    <div class="sticker-tray__items" id="stickerItems">
-      <div class="sticker-tray__item" data-sticker="🎨" data-color="#fef3c7" role="button" tabindex="0" aria-label="Place paint palette sticker">🎨</div>
-      <div class="sticker-tray__item" data-sticker="✦" data-color="#e0e7ff" role="button" tabindex="0" aria-label="Place star sticker">✦</div>
-      <div class="sticker-tray__item" data-sticker="💡" data-color="#d1fae5" role="button" tabindex="0" aria-label="Place lightbulb sticker">💡</div>
-      <div class="sticker-tray__item" data-sticker="🚀" data-color="#fce7f3" role="button" tabindex="0" aria-label="Place rocket sticker">🚀</div>
-      <div class="sticker-tray__item" data-sticker="📝" data-color="#fef9c3" data-type="postit" role="button" tabindex="0" aria-label="Place post-it note">📝</div>
-      <div class="sticker-tray__divider" role="separator"></div>
-      <div class="sticker-tray__clear" id="stickerClear" title="Clear all stickers" role="button" tabindex="0">Clear all</div>
-    </div>
-  </div>
   <div class="sticker-canvas" id="stickerCanvas"></div>
 
   <!-- Noise grain overlay -->

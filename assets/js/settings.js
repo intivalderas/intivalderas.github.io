@@ -1,0 +1,222 @@
+/* =========================================
+   Settings Panel
+   Toggle effects + dark mode + localStorage
+   ========================================= */
+
+window.initSettings = function () {
+  var panel = document.getElementById('settingsPanel');
+  var toggle = document.getElementById('settingsToggle');
+  var isDesktop = window.innerWidth > 768;
+
+  if (!panel || !toggle) return;
+
+  // Show/hide gyroscope toggle on mobile only
+  var gyroRow = document.getElementById('settingGyroRow');
+  if (gyroRow) {
+    gyroRow.style.display = isDesktop ? 'none' : '';
+  }
+
+  // Show/hide cursor toggle on desktop only
+  var cursorRow = document.getElementById('settingCursorRow');
+  if (cursorRow) {
+    cursorRow.style.display = isDesktop ? '' : 'none';
+  }
+
+  // --- Toggle panel open/close ---
+  toggle.addEventListener('click', function () {
+    var isOpen = panel.classList.toggle('settings__panel--open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Close panel when clicking outside
+  document.addEventListener('click', function (e) {
+    if (!panel.contains(e.target) && !toggle.contains(e.target)) {
+      panel.classList.remove('settings__panel--open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // --- Setting handlers ---
+  var darkToggle = document.getElementById('settingDarkMode');
+  var particlesToggle = document.getElementById('settingParticles');
+  var motionToggle = document.getElementById('settingMotion');
+  var gyroToggle = document.getElementById('settingGyroscope');
+  var cursorToggle = document.getElementById('settingCursor');
+  var disableAllToggle = document.getElementById('settingDisableAll');
+
+  // Restore saved preferences
+  function loadPrefs() {
+    var darkPref = localStorage.getItem('setting-dark-mode');
+    var particlesPref = localStorage.getItem('setting-particles');
+    var motionPref = localStorage.getItem('setting-motion');
+    var gyroPref = localStorage.getItem('setting-gyroscope');
+    var cursorPref = localStorage.getItem('setting-cursor');
+    var disableAllPref = localStorage.getItem('setting-disable-all');
+
+    if (darkPref === 'true') {
+      document.body.classList.add('dark-mode');
+      if (darkToggle) darkToggle.checked = true;
+    }
+
+    if (particlesPref === 'false') {
+      var canvas = document.getElementById('particleCanvas');
+      if (canvas) canvas.style.display = 'none';
+      if (particlesToggle) particlesToggle.checked = false;
+    }
+
+    if (motionPref === 'false') {
+      document.body.classList.add('reduced-effects');
+      if (motionToggle) motionToggle.checked = false;
+    }
+
+    if (cursorPref === 'false' && isDesktop) {
+      document.body.classList.add('cursor--disabled');
+      if (cursorToggle) cursorToggle.checked = false;
+    }
+
+    if (gyroPref === 'true' && !isDesktop && window.Gyroscope) {
+      Gyroscope.init();
+      if (gyroToggle) gyroToggle.checked = true;
+    }
+
+    if (disableAllPref === 'true') {
+      if (disableAllToggle) disableAllToggle.checked = true;
+    }
+  }
+
+  loadPrefs();
+
+  // Dark mode
+  if (darkToggle) {
+    darkToggle.addEventListener('change', function () {
+      var isDark = darkToggle.checked;
+      document.body.classList.toggle('dark-mode', isDark);
+      localStorage.setItem('setting-dark-mode', String(isDark));
+
+      // Flash transition (same as easter egg)
+      var flash = document.createElement('div');
+      flash.style.cssText =
+        'position:fixed;inset:0;z-index:99999;pointer-events:none;opacity:1;transition:opacity 0.5s ease;' +
+        'background:' + (isDark ? '#0a0a0a' : '#fafafa');
+      document.body.appendChild(flash);
+      requestAnimationFrame(function () {
+        flash.style.opacity = '0';
+        setTimeout(function () { flash.remove(); }, 500);
+      });
+    });
+  }
+
+  // Particles
+  if (particlesToggle) {
+    particlesToggle.addEventListener('change', function () {
+      var canvas = document.getElementById('particleCanvas');
+      if (canvas) {
+        canvas.style.display = particlesToggle.checked ? '' : 'none';
+      }
+      localStorage.setItem('setting-particles', String(particlesToggle.checked));
+      uncheckMasterIfNeeded();
+    });
+  }
+
+  // Motion effects
+  if (motionToggle) {
+    motionToggle.addEventListener('change', function () {
+      document.body.classList.toggle('reduced-effects', !motionToggle.checked);
+      localStorage.setItem('setting-motion', String(motionToggle.checked));
+      uncheckMasterIfNeeded();
+    });
+  }
+
+  // Custom cursor
+  if (cursorToggle) {
+    cursorToggle.addEventListener('change', function () {
+      document.body.classList.toggle('cursor--disabled', !cursorToggle.checked);
+      localStorage.setItem('setting-cursor', String(cursorToggle.checked));
+      uncheckMasterIfNeeded();
+    });
+  }
+
+  // Gyroscope
+  if (gyroToggle) {
+    gyroToggle.addEventListener('change', function () {
+      if (gyroToggle.checked) {
+        if (window.Gyroscope) {
+          Gyroscope.init().then(function (ok) {
+            if (!ok) {
+              gyroToggle.checked = false;
+              localStorage.setItem('setting-gyroscope', 'false');
+            }
+          });
+        }
+      } else {
+        if (window.Gyroscope) Gyroscope.deactivate();
+      }
+      localStorage.setItem('setting-gyroscope', String(gyroToggle.checked));
+      uncheckMasterIfNeeded();
+    });
+  }
+
+  // --- Disable all effects (master toggle) ---
+  function uncheckMasterIfNeeded() {
+    if (!disableAllToggle || !disableAllToggle.checked) return;
+    // If any effect toggle was re-enabled, uncheck master
+    var anyOn = (particlesToggle && particlesToggle.checked) ||
+                (motionToggle && motionToggle.checked) ||
+                (cursorToggle && cursorToggle.checked) ||
+                (gyroToggle && gyroToggle.checked);
+    if (anyOn) {
+      disableAllToggle.checked = false;
+      localStorage.setItem('setting-disable-all', 'false');
+    }
+  }
+
+  if (disableAllToggle) {
+    disableAllToggle.addEventListener('change', function () {
+      var disabling = disableAllToggle.checked;
+      localStorage.setItem('setting-disable-all', String(disabling));
+
+      if (disabling) {
+        // Turn off all effect toggles
+        if (particlesToggle && particlesToggle.checked) {
+          particlesToggle.checked = false;
+          particlesToggle.dispatchEvent(new Event('change'));
+        }
+        if (motionToggle && motionToggle.checked) {
+          motionToggle.checked = false;
+          motionToggle.dispatchEvent(new Event('change'));
+        }
+        if (cursorToggle && cursorToggle.checked) {
+          cursorToggle.checked = false;
+          cursorToggle.dispatchEvent(new Event('change'));
+        }
+        if (gyroToggle && gyroToggle.checked) {
+          gyroToggle.checked = false;
+          gyroToggle.dispatchEvent(new Event('change'));
+        }
+        // Re-check master since dispatched changes will have unchecked it
+        disableAllToggle.checked = true;
+        localStorage.setItem('setting-disable-all', 'true');
+      } else {
+        // Restore defaults: particles, motion, cursor on
+        if (particlesToggle && !particlesToggle.checked) {
+          particlesToggle.checked = true;
+          particlesToggle.dispatchEvent(new Event('change'));
+        }
+        if (motionToggle && !motionToggle.checked) {
+          motionToggle.checked = true;
+          motionToggle.dispatchEvent(new Event('change'));
+        }
+        if (cursorToggle && !cursorToggle.checked && isDesktop) {
+          cursorToggle.checked = true;
+          cursorToggle.dispatchEvent(new Event('change'));
+        }
+      }
+    });
+  }
+
+  // Expose sync method for dark mode easter egg
+  window.syncDarkModeToggle = function (isDark) {
+    if (darkToggle) darkToggle.checked = isDark;
+    localStorage.setItem('setting-dark-mode', String(isDark));
+  };
+};

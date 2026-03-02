@@ -11,7 +11,7 @@ console.log(
 console.log(
   '%c Designed by Inti Valderas · Built by Claude Code\n' +
   '%c Zero deps. Zero build steps. Just vibes.\n\n' +
-  'Poke around the source → https://github.com/intivalderas/intivalderas.github.io\n' +
+  'Poke around the source → https://github.com/intivalderas/valderas.be\n' +
   'Psst... try triple-clicking the logo.',
   'font-size: 12px; font-weight: bold;',
   'font-size: 12px; font-style: italic; color: #888;'
