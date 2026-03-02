@@ -33,7 +33,10 @@ window.initMobileMenu = function () {
   navMenu.addEventListener('click', () => {
     navMenu.classList.toggle('nav__menu--active');
     mobileNav.classList.toggle('mobile-nav--active');
-    document.body.style.overflow = mobileNav.classList.contains('mobile-nav--active') ? 'hidden' : '';
+    const isOpen = mobileNav.classList.contains('mobile-nav--active');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    navMenu.setAttribute('aria-expanded', String(isOpen));
+    mobileNav.setAttribute('aria-hidden', String(!isOpen));
   });
 
   mobileNav.querySelectorAll('.mobile-nav__link').forEach(link => {
@@ -41,6 +44,8 @@ window.initMobileMenu = function () {
       navMenu.classList.remove('nav__menu--active');
       mobileNav.classList.remove('mobile-nav--active');
       document.body.style.overflow = '';
+      navMenu.setAttribute('aria-expanded', 'false');
+      mobileNav.setAttribute('aria-hidden', 'true');
     });
   });
 };
@@ -121,4 +126,40 @@ window.initTagHover = function () {
       this.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
     });
   });
+};
+
+
+window.initResume = function () {
+  const toggleBtn = document.getElementById('resumeToggle');
+  const toggleMobile = document.getElementById('resumeToggleMobile');
+  const backBtn = document.getElementById('resumeBack');
+  const printBtn = document.getElementById('resumePrint');
+  const navMenu = document.getElementById('navMenu');
+  const mobileNav = document.getElementById('mobileNav');
+
+  function enterResume(e) {
+    e.preventDefault();
+    document.body.classList.add('resume-mode');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Close mobile menu if open
+    if (navMenu) {
+      navMenu.classList.remove('nav__menu--active');
+      navMenu.setAttribute('aria-expanded', 'false');
+    }
+    if (mobileNav) {
+      mobileNav.classList.remove('mobile-nav--active');
+      mobileNav.setAttribute('aria-hidden', 'true');
+    }
+    document.body.style.overflow = '';
+  }
+
+  function exitResume(e) {
+    e.preventDefault();
+    document.body.classList.remove('resume-mode');
+  }
+
+  if (toggleBtn) toggleBtn.addEventListener('click', enterResume);
+  if (toggleMobile) toggleMobile.addEventListener('click', enterResume);
+  if (backBtn) backBtn.addEventListener('click', exitResume);
+  if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
 };

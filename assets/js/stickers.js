@@ -65,27 +65,42 @@
 
     if (!stickerTray || !stickerCanvas) return;
 
+    function onKeyActivate(handler) {
+      return function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handler.call(this, e);
+        }
+      };
+    }
+
     // Toggle tray
     if (stickerToggle) {
-      stickerToggle.addEventListener('click', () => {
+      const toggleTray = () => {
         stickerTray.classList.toggle('sticker-tray--open');
-      });
+        const isOpen = stickerTray.classList.contains('sticker-tray--open');
+        stickerToggle.setAttribute('aria-expanded', String(isOpen));
+      };
+      stickerToggle.addEventListener('click', toggleTray);
+      stickerToggle.addEventListener('keydown', onKeyActivate(toggleTray));
     }
 
     // Clear all stickers
     if (stickerClear) {
-      stickerClear.addEventListener('click', () => {
+      const clearAll = () => {
         const stickers = stickerCanvas.querySelectorAll('.sticker');
         stickers.forEach((s, i) => {
           setTimeout(() => removeSticker(s), i * 50);
         });
-      });
+      };
+      stickerClear.addEventListener('click', clearAll);
+      stickerClear.addEventListener('keydown', onKeyActivate(clearAll));
     }
 
     // Place stickers
     if (stickerItems) {
       stickerItems.querySelectorAll('.sticker-tray__item:not(.sticker-tray__clear)').forEach(item => {
-        item.addEventListener('click', () => {
+        const placeSticker = () => {
           const type = item.dataset.type || 'emoji';
           const emoji = item.dataset.sticker;
           const color = item.dataset.color || '#fef3c7';
@@ -124,7 +139,9 @@
           });
 
           makeDraggable(sticker);
-        });
+        }
+        item.addEventListener('click', placeSticker);
+        item.addEventListener('keydown', onKeyActivate(placeSticker));
       });
     }
   };

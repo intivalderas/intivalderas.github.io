@@ -13,23 +13,28 @@
 </head>
 <body>
 
+  <!-- Skip to content -->
+  <a href="#about" class="skip-link">Skip to content</a>
+
   <!-- Navigation -->
-  <nav class="nav" id="nav">
+  <nav class="nav" id="nav" aria-label="Main navigation">
     <a href="index.html" class="nav__logo">Inti Valderas Caro</a>
     <div class="nav__links">
       <a href="#about" class="nav__link" data-label="Get to know me">About</a>
       <a href="#contact" class="nav__link" data-label="Let's talk">Contact</a>
+      <button class="nav__link nav__link--btn" data-label="View CV" id="resumeToggle" type="button">Resume</button>
     </div>
-    <button class="nav__menu" id="navMenu" aria-label="Toggle menu">
+    <button class="nav__menu" id="navMenu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNav">
       <span></span><span></span>
     </button>
   </nav>
 
   <!-- Mobile menu -->
-  <div class="mobile-nav" id="mobileNav">
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true">
     <a href="#about" class="mobile-nav__link">About</a>
     <a href="#contact" class="mobile-nav__link">Contact</a>
-  </div>
+    <button class="mobile-nav__link mobile-nav__link--btn" id="resumeToggleMobile" type="button">Resume</button>
+  </nav>
 
   <!-- Hero -->
   <header class="hero">
@@ -40,8 +45,8 @@
         <span class="split-text" data-text="digital experiences">digital experiences</span>
       </h1>
       <p class="hero__subtitle">
-        I work at the intersection of interaction design, data, and AI —
-        creating interfaces that feel intuitive and meaningful.
+        UX Design consultant at <strong>iO</strong>, currently shaping digital experiences
+        at <strong>VRT MAX</strong> — at the intersection of interaction design, data, and AI.
       </p>
       <div class="hero__tags">
         <span class="tag">Interaction Design</span>
@@ -51,7 +56,7 @@
       </div>
       <a href="#about" class="hero__cta magnetic-btn">
         <span>About me</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M7 17L17 7M17 7H7M17 7V17"/>
         </svg>
       </a>
@@ -65,7 +70,7 @@
   <!-- Portfolio (hidden until content is ready — see dev branch) -->
 
   <!-- Marquee Ticker -->
-  <div class="marquee">
+  <div class="marquee" aria-hidden="true">
     <div class="marquee__track">
       <div class="marquee__content">
         <span>Interaction Design</span><span class="marquee__dot">·</span>
@@ -109,16 +114,16 @@
         <p>
           I'm Inti Valderas Caro, a UX & Interaction Designer based in Sint-Niklaas, Belgium.
           I hold a Master's degree in Interaction Design and currently design digital experiences at
-          <strong>VRT</strong>, Flanders' public broadcaster.
+          <strong>VRT MAX</strong>, Flanders' public broadcaster, as a UX Design consultant via <strong>iO</strong>.
         </p>
         <p>
-          Beyond my work at VRT, I serve as a board member at <strong>Open Knowledge Belgium</strong>
+          Beyond my work at VRT MAX, I serve as a board member at <strong>Open Knowledge Belgium</strong>
           and coordinate the <strong>Open Summer of Code</strong> — connecting students with open-source
           civic tech projects.
         </p>
         <p>
           Through <strong>Valderas</strong>, I consult on interactive strategy and design,
-          having worked with organisations like KBC, Engie, and LUCA School of Arts.
+          having worked with organisations like KBC, <strong>Smooth Sailing</strong>, Engie, and LUCA School of Arts.
         </p>
         <p>
           I'm particularly fascinated by the intersection of interaction design, machine learning,
@@ -130,10 +135,10 @@
         <div class="about__detail-group">
           <div class="label">Experience</div>
           <ul class="about__list">
-            <li>UX Designer — VRT</li>
+            <li>UX Designer — VRT MAX (via iO)</li>
+            <li>Digital & Design Strategist — Valderas</li>
             <li>Coordinator — Open Summer of Code</li>
             <li>Board Member — Open Knowledge Belgium</li>
-            <li>Founder — Valderas</li>
           </ul>
         </div>
         <div class="about__detail-group">
@@ -172,15 +177,254 @@
       </p>
       <a href="mailto:inti@valderas.be" class="contact__email magnetic-btn">
         <span>inti@valderas.be</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M7 17L17 7M17 7H7M17 7V17"/>
         </svg>
       </a>
       <div class="contact__links">
-        <a href="https://linkedin.com/in/inti-valderas-caro" class="contact__link magnetic-btn" target="_blank">LinkedIn</a>
-        <a href="https://valderas.medium.com" class="contact__link magnetic-btn" target="_blank">Medium</a>
-        <a href="https://dribbble.com/Valderas" class="contact__link magnetic-btn" target="_blank">Dribbble</a>
-        <a href="https://github.com/intivalderas" class="contact__link magnetic-btn" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/inti-valderas-caro" class="contact__link magnetic-btn" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in new tab)</span></a>
+        <a href="https://valderas.medium.com" class="contact__link magnetic-btn" target="_blank" rel="noopener noreferrer">Medium<span class="sr-only"> (opens in new tab)</span></a>
+        <a href="https://dribbble.com/Valderas" class="contact__link magnetic-btn" target="_blank" rel="noopener noreferrer">Dribbble<span class="sr-only"> (opens in new tab)</span></a>
+        <a href="https://github.com/intivalderas" class="contact__link magnetic-btn" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in new tab)</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resume (hidden by default, shown in resume mode) -->
+  <section class="resume" id="resume">
+    <div class="resume__actions">
+      <button class="resume__btn resume__btn--back" id="resumeBack" type="button">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M19 12H5M5 12L12 19M5 12L12 5"/>
+        </svg>
+        Back to site
+      </button>
+      <button class="resume__btn resume__btn--print" id="resumePrint" type="button">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
+          <rect x="6" y="14" width="12" height="8"/>
+        </svg>
+        Download PDF
+      </button>
+    </div>
+
+    <div class="resume__document">
+      <header class="resume__header">
+        <h1 class="resume__name">Inti Valderas Caro</h1>
+        <p class="resume__title">UX & Interaction Designer</p>
+        <div class="resume__contact">
+          <span>inti@valderas.be</span>
+          <span class="resume__sep" aria-hidden="true">/</span>
+          <span>Sint-Niklaas, Belgium</span>
+          <span class="resume__sep" aria-hidden="true">/</span>
+          <a href="https://linkedin.com/in/inti-valderas-caro" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <span class="resume__sep" aria-hidden="true">/</span>
+          <a href="https://valderas.be">valderas.be</a>
+        </div>
+      </header>
+
+      <div class="resume__section">
+        <h2 class="resume__section-title">Experience</h2>
+        <div class="resume__timeline">
+          <div class="resume__entry">
+            <div class="resume__period">Mar 2025 — Present</div>
+            <div class="resume__details">
+              <div class="resume__role">UX Designer VRT MAX</div>
+              <div class="resume__company">VRT (via iO) · Full-time</div>
+            </div>
+          </div>
+          <div class="resume__entry">
+            <div class="resume__period">Nov 2022 — Present</div>
+            <div class="resume__details">
+              <div class="resume__role">UX Design Consultant</div>
+              <div class="resume__company">iO · Full-time</div>
+            </div>
+          </div>
+          <div class="resume__entry">
+            <div class="resume__period">Jul 2016 — Present</div>
+            <div class="resume__details">
+              <div class="resume__role">Digital & Design Strategist</div>
+              <div class="resume__company">Valderas · Self-employed</div>
+            </div>
+          </div>
+          <div class="resume__entry">
+            <div class="resume__period">Dec 2022 — Mar 2025</div>
+            <div class="resume__details">
+              <div class="resume__role">UX Designer / Conversational Designer</div>
+              <div class="resume__company">KBC · Full-time</div>
+            </div>
+          </div>
+          <div class="resume__entry">
+            <div class="resume__period">Oct 2021 — Nov 2022</div>
+            <div class="resume__details">
+              <div class="resume__role">UX Designer / Researcher</div>
+              <div class="resume__company">Smooth Sailing · Full-time</div>
+            </div>
+          </div>
+          <div class="resume__entry">
+            <div class="resume__period">Aug 2020 — Sep 2021</div>
+            <div class="resume__details">
+              <div class="resume__role">UX Designer</div>
+              <div class="resume__company">Smooth Sailing · Freelance</div>
+            </div>
+          </div>
+          <div class="resume__entry">
+            <div class="resume__period">Jul 2021 — Jun 2022</div>
+            <div class="resume__details">
+              <div class="resume__role">Design Coach</div>
+              <div class="resume__company">Open Summer of Code · Freelance</div>
+            </div>
+          </div>
+          <div class="resume__entry">
+            <div class="resume__period">Jul 2020 — Jun 2021</div>
+            <div class="resume__details">
+              <div class="resume__role">IxD & Student Coach</div>
+              <div class="resume__company">Open Summer of Code · Contract</div>
+            </div>
+          </div>
+          <div class="resume__entry">
+            <div class="resume__period">Jul 2019 — Jun 2020</div>
+            <div class="resume__details">
+              <div class="resume__role">Interaction Designer (Student)</div>
+              <div class="resume__company">Open Summer of Code · Contract</div>
+            </div>
+          </div>
+          <div class="resume__entry">
+            <div class="resume__period">May 2019 — Jun 2021</div>
+            <div class="resume__details">
+              <div class="resume__role">Board of Directors</div>
+              <div class="resume__company">LUCA School of Arts</div>
+            </div>
+          </div>
+          <div class="resume__entry">
+            <div class="resume__period">Oct 2018 — Jun 2021</div>
+            <div class="resume__details">
+              <div class="resume__role">Chairman Participation Committee</div>
+              <div class="resume__company">LUCA School of Arts</div>
+            </div>
+          </div>
+          <div class="resume__entry">
+            <div class="resume__period">Mar 2020 — May 2020</div>
+            <div class="resume__details">
+              <div class="resume__role">Interaction Design Intern</div>
+              <div class="resume__company">ENGIE Belgium · Internship</div>
+            </div>
+          </div>
+          <div class="resume__entry">
+            <div class="resume__period">Sep 2015 — Jun 2016</div>
+            <div class="resume__details">
+              <div class="resume__role">Accounting Intern</div>
+              <div class="resume__company">QinetiQ · Internship</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume__section">
+        <h2 class="resume__section-title">Education</h2>
+        <div class="resume__timeline">
+          <div class="resume__entry">
+            <div class="resume__period">2017 — 2021</div>
+            <div class="resume__details">
+              <div class="resume__role">Master of Interaction Design (IxD)</div>
+              <div class="resume__company">LUCA School of Arts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume__section">
+        <h2 class="resume__section-title">Focus Areas</h2>
+        <div class="resume__skills">
+          <span class="tag">UX Design</span>
+          <span class="tag">Interaction Design</span>
+          <span class="tag">Conversational AI</span>
+          <span class="tag">Data Visualization</span>
+          <span class="tag">Design Strategy</span>
+          <span class="tag">UX Research</span>
+          <span class="tag">Figma</span>
+          <span class="tag">Prototyping</span>
+          <span class="tag">Design Systems</span>
+          <span class="tag">Open Source</span>
+        </div>
+      </div>
+
+      <div class="resume__section">
+        <h2 class="resume__section-title">Recommendations</h2>
+        <div class="resume__recommendations">
+          <blockquote class="resume__recommendation">
+            <a href="https://www.linkedin.com/in/valeriecz" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/recommendations/valerie-czaplewski.jpg" alt="Valerie Czaplewski" class="resume__rec-photo" loading="lazy">
+            </a>
+            <div class="resume__rec-content">
+              <p class="resume__rec-text">"I really enjoyed working with Inti. He is a strong UX designer with great expertise, who always starts from the user's perspective. Inti isn't afraid to be critical, asks the right questions, and consistently gives constructive feedback. What stands out most is his calm, positive attitude. He communicates clearly, takes the time to explain things well, and is always ready to help. An absolute asset to any team."</p>
+              <footer class="resume__rec-footer">
+                <cite class="resume__rec-author"><a href="https://www.linkedin.com/in/valeriecz" target="_blank" rel="noopener noreferrer">Valerie Czaplewski</a></cite>
+                <div class="resume__rec-role">Freelance Conversational UX Designer</div>
+              </footer>
+            </div>
+          </blockquote>
+          <blockquote class="resume__recommendation">
+            <a href="https://www.linkedin.com/in/yasinyer" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/recommendations/yasin-yer.jpg" alt="Yasin Yer" class="resume__rec-photo" loading="lazy">
+            </a>
+            <div class="resume__rec-content">
+              <p class="resume__rec-text">"Inti is self-critical designer with an eye for detail and design. Someone who is enormously flexible in adapting to new technologies and software. No question or problem remains unsolved in his hands. Thanks to his support and guidance I became the designer I am today."</p>
+              <footer class="resume__rec-footer">
+                <cite class="resume__rec-author"><a href="https://www.linkedin.com/in/yasinyer" target="_blank" rel="noopener noreferrer">Yasin Yer</a></cite>
+                <div class="resume__rec-role">Freelance User Interface Designer</div>
+              </footer>
+            </div>
+          </blockquote>
+          <blockquote class="resume__recommendation">
+            <a href="https://www.linkedin.com/in/jennifersnow" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/recommendations/jennifer-snow.jpg" alt="Jennifer Snow" class="resume__rec-photo" loading="lazy">
+            </a>
+            <div class="resume__rec-content">
+              <p class="resume__rec-text">"I first met Inti when he was working for us through OSOC (Open Summer of Code 2019) and later as an intern at Engie under my supervision. Inti thrives as a creative innovative mind, he loves a challenge and brings new out-of-the-box ideas to the table. I never worry when Inti is on the team, because I know he is dedicated and sees the projects through with a good dose of positive, helping and team-work attitude."</p>
+              <footer class="resume__rec-footer">
+                <cite class="resume__rec-author"><a href="https://www.linkedin.com/in/jennifersnow" target="_blank" rel="noopener noreferrer">Jennifer Snow</a></cite>
+                <div class="resume__rec-role">UX Designer & Functional Analyst, ENGIE Electrabel</div>
+              </footer>
+            </div>
+          </blockquote>
+          <blockquote class="resume__recommendation">
+            <a href="https://www.linkedin.com/in/simonvandamme" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/recommendations/simon-van-damme.jpg" alt="Simon Van Damme" class="resume__rec-photo" loading="lazy">
+            </a>
+            <div class="resume__rec-content">
+              <p class="resume__rec-text">"At LUCA School of Arts, Inti represented 3,500 students on our board of directors for two years. Together with a few other students, he managed to develop an even better participation model for students during the height of the COVID period. We are grateful to him for this impressive achievement and the wonderful collaboration."</p>
+              <footer class="resume__rec-footer">
+                <cite class="resume__rec-author"><a href="https://www.linkedin.com/in/simonvandamme" target="_blank" rel="noopener noreferrer">Simon Van Damme</a></cite>
+                <div class="resume__rec-role">Board Member in Education and Culture</div>
+              </footer>
+            </div>
+          </blockquote>
+          <blockquote class="resume__recommendation">
+            <a href="https://www.linkedin.com/in/bolat-tleubayev" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/recommendations/bolat-tleubayev.jpg" alt="Bolat Tleubayev" class="resume__rec-photo" loading="lazy">
+            </a>
+            <div class="resume__rec-content">
+              <p class="resume__rec-text">"I was working with Inti for about a month at Open Summer of Code. During that whole period Inti was overseeing our team of students as a coach. His input to the team effort was great both for morale and KPI achievement. He was able to motivate, direct, and coach every team member efficiently."</p>
+              <footer class="resume__rec-footer">
+                <cite class="resume__rec-author"><a href="https://www.linkedin.com/in/bolat-tleubayev" target="_blank" rel="noopener noreferrer">Bolat Tleubayev</a></cite>
+                <div class="resume__rec-role">Senior Azure Data Engineer @ EPAM</div>
+              </footer>
+            </div>
+          </blockquote>
+          <blockquote class="resume__recommendation">
+            <a href="https://www.linkedin.com/in/kris-wauters-4a747087" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/recommendations/kris-wauters.jpg" alt="Kris Wauters" class="resume__rec-photo" loading="lazy">
+            </a>
+            <div class="resume__rec-content">
+              <p class="resume__rec-text">"A wonderful collaboration that grew from a purely informal introduction. The most important thing about Inti Valderas is that you can always count on him as an enthusiastic entrepreneur, brimming with innovative ideas. I can highly recommend Inti."</p>
+              <footer class="resume__rec-footer">
+                <cite class="resume__rec-author"><a href="https://www.linkedin.com/in/kris-wauters-4a747087" target="_blank" rel="noopener noreferrer">Kris Wauters</a></cite>
+                <div class="resume__rec-role">CEO NITRA ~ NITRA Academy</div>
+              </footer>
+            </div>
+          </blockquote>
+        </div>
       </div>
     </div>
   </section>
@@ -192,28 +436,28 @@
 
   <!-- Sticker Board -->
   <div class="sticker-tray" id="stickerTray">
-    <div class="sticker-tray__toggle" id="stickerToggle">✦ Stickers</div>
+    <div class="sticker-tray__toggle" id="stickerToggle" role="button" tabindex="0" aria-expanded="false" aria-controls="stickerItems">✦ Stickers</div>
     <div class="sticker-tray__items" id="stickerItems">
-      <div class="sticker-tray__item" data-sticker="🎨" data-color="#fef3c7">🎨</div>
-      <div class="sticker-tray__item" data-sticker="✦" data-color="#e0e7ff">✦</div>
-      <div class="sticker-tray__item" data-sticker="💡" data-color="#d1fae5">💡</div>
-      <div class="sticker-tray__item" data-sticker="🚀" data-color="#fce7f3">🚀</div>
-      <div class="sticker-tray__item" data-sticker="📝" data-color="#fef9c3" data-type="postit">📝</div>
-      <div class="sticker-tray__divider"></div>
-      <div class="sticker-tray__clear" id="stickerClear" title="Clear all stickers">Clear all</div>
+      <div class="sticker-tray__item" data-sticker="🎨" data-color="#fef3c7" role="button" tabindex="0" aria-label="Place paint palette sticker">🎨</div>
+      <div class="sticker-tray__item" data-sticker="✦" data-color="#e0e7ff" role="button" tabindex="0" aria-label="Place star sticker">✦</div>
+      <div class="sticker-tray__item" data-sticker="💡" data-color="#d1fae5" role="button" tabindex="0" aria-label="Place lightbulb sticker">💡</div>
+      <div class="sticker-tray__item" data-sticker="🚀" data-color="#fce7f3" role="button" tabindex="0" aria-label="Place rocket sticker">🚀</div>
+      <div class="sticker-tray__item" data-sticker="📝" data-color="#fef9c3" data-type="postit" role="button" tabindex="0" aria-label="Place post-it note">📝</div>
+      <div class="sticker-tray__divider" role="separator"></div>
+      <div class="sticker-tray__clear" id="stickerClear" title="Clear all stickers" role="button" tabindex="0">Clear all</div>
     </div>
   </div>
   <div class="sticker-canvas" id="stickerCanvas"></div>
 
   <!-- Noise grain overlay -->
-  <div class="noise-overlay"></div>
+  <div class="noise-overlay" aria-hidden="true"></div>
 
   <!-- Particle canvas -->
-  <canvas id="particleCanvas"></canvas>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
   <!-- Custom cursor -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-follower" id="cursorFollower"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-follower" id="cursorFollower" aria-hidden="true"></div>
 
   <script src="assets/js/cursor.js"></script>
   <script src="assets/js/text-effects.js"></script>
