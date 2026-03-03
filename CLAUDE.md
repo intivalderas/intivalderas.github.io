@@ -22,7 +22,6 @@ valderas.be/
 │   ├── blog/
 │   │   └── designing-with-ai.njk  # → article layout (permalink: /blog/designing-with-ai/)
 │   └── portfolio/
-│       └── vrt-redesign.njk    # → article layout (permalink: /portfolio/vrt-redesign/)
 ├── assets/                     # Passthrough copy (untouched by 11ty)
 │   ├── css/                    # Partials imported by style.css
 │   ├── js/                     # Vanilla JS modules (window.initX pattern)
